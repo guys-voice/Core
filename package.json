@@ -1,10 +1,11 @@
 {
-  "name": "test",
+  "name": "my_project",
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "build-and-run": "npm run build && python main.py"
   },
   "dependencies": {
     "react": "^17.0.2",
