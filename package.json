@@ -6,10 +6,5 @@
     "build": "next build",
     "start": "next start",
     "build-and-run": "npm run build && python main.py"
-  },
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-    // Add other frontend dependencies as needed
   }
 }
