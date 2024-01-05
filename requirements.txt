@@ -5,4 +5,4 @@ jsond
 urllib3==1.26.8
 flask
 gunicorn
-time
+time==3.3
