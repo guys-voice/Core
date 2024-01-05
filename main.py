@@ -139,17 +139,8 @@ def send_actual_voices_to_dm(update):
 
         url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice"
         response = requests.post(url, json=data)
-
-# forwards the request to a specific function. serves as a transformer between actually working functions
-def process_update(update):
-    global last_update_id
-    if 'inline_query' in update:
-        inline_query(update)
-    elif 'message' in update and 'text' in update['message']:
-        send_actual_voices_to_dm(update)
-    last_update_id = update['update_id'] + 1
-    # here you will write the function that handles direct messages
-    return
+    else:
+        # here you will write the function that handles direct messages
 
 # Function to get actual updates from the bot's API
 def get_updates():
@@ -171,10 +162,14 @@ def main():
     while True:
         updates = get_updates()
         for update in updates:
-            process_update(update)
+            global last_update_id
+            if 'inline_query' in update:
+                inline_query(update)
+            elif 'message' in update and 'text' in update['message']:
+                send_actual_voices_to_dm(update)
+            last_update_id = update['update_id'] + 1
+            return
 
 # used to start the program
 if __name__ == "__main__":
-    last_update_id = -1
-    print('Bot starts working...')
     main()
