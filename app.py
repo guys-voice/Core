@@ -1,4 +1,5 @@
 from flask import Flask, request
+import time
 
 app = Flask(__name__)
 
@@ -19,6 +20,7 @@ def execute_command(command):
     try:
         while True:
             result = subprocess.run(command.split(), capture_output=True, text=True)
+            time.sleep(1)
         return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
     except Exception as e:
         return f"Error: {str(e)}\n"
