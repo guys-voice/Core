@@ -31,13 +31,13 @@ def menu():
         return "The command is executed!"
 
 @app.route('/stats', methods=['GET'])
-def menu():
+def stats():
     if request.method == 'GET':
         result = subprocess.run('python3 stats.py', capture_output=True, text=True)
         return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
 
 @app.route('/users', methods=['GET'])
-def menu():
+def users():
     if request.method == 'GET':
         result = subprocess.run('python3 users.py', capture_output=True, text=True)
         return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
