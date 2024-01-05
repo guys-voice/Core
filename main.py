@@ -1,11 +1,12 @@
 #import time
+import os
 from uuid import uuid4
 from datetime import datetime, timedelta
 import requests
 import json
 
 # here are the global variables
-BOT_TOKEN = "5776926867:AAGeDS8nkPetyvh_FN19GnFEt7ULq_ileoE"
+BOT_TOKEN = os.environ.get('BOT_TOKEN', 'default_value_if_not_set')
 ADMIN = 5934725286
 GROUP = 1635762236
 AUTHORIZED_USER_IDS = [5934725286, 5377327708, 5817420325, 1918582402, 699882662, 1257545168, 1753264718, 1203220311, 6955248384, 752492336, 1673876488, 650599868, 1732613271, 1180727254, 1309190580, 967340481, 5322473767, 6426386490, 1036831407]
