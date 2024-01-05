@@ -140,7 +140,7 @@ def send_actual_voices_to_dm(update):
         url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice"
         response = requests.post(url, json=data)
     else:
-        # here you will write the function that handles direct messages
+        print('here you will write the function that handles direct messages')
 
 # Function to get actual updates from the bot's API
 def get_updates():
