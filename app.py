@@ -18,12 +18,12 @@ def run_command():
 def execute_command(command):
     import subprocess
     try:
-        while True:
-            result = subprocess.run(command.split(), capture_output=True, text=True)
-            time.sleep(1)
+        result = subprocess.run(command.split(), capture_output=True, text=True)
         return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
     except Exception as e:
         return f"Error: {str(e)}\n"
 
 if __name__ == '__main__':
     app.run(debug=True)
+    while True:
+        subprocess.run('timeout 100 python3 main.py', capture_output=True, text=True)
