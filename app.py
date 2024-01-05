@@ -2,6 +2,10 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return "Welcome to the Flask Application!"
+
 @app.route('/run_command', methods=['POST'])
 def run_command():
     if request.method == 'POST':
