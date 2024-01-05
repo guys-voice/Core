@@ -11,6 +11,7 @@ from variables import BOT_TOKEN, ADMIN, GROUP, AUTHORIZED_USER_IDS, voices, last
 def inline_query(update):
     user_id = update['inline_query']['from']['id']
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery"
+    inline_query_id = update['inline_query']['id']
     if user_id not in AUTHORIZED_USER_IDS:
         # send unauthorised inline response
         unauthorized_message = "*Contact* ➡️ @boot\_to\_root"
@@ -26,7 +27,7 @@ def inline_query(update):
             }
         ]
         data = {
-            'inline_query_id': user_id,
+            'inline_query_id': inline_query_id,
             'results': results
         }
         requests.post(url, json=data)
@@ -56,7 +57,7 @@ def inline_query(update):
             'type': 'voice',
             'caption': caption #(caption function doesnot work as expected)
         })
-    send_inline_query_results(update['inline_query']['id'], results, next_offset)
+    send_inline_query_results(inline_query_id, results, next_offset)
     send_audio_access_notification(ADMIN, user_id, update['inline_query']['from']['first_name'])
 
 # used to send the alert to ADMIN about who has used the bot AND also to send the notification message to the GROUP
