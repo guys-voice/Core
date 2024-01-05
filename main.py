@@ -8,12 +8,13 @@ from datetime import datetime, timedelta
 from variables import BOT_TOKEN, ADMIN, GROUP, AUTHORIZED_USER_IDS, voices
 global last_id_update
 last_sent_time = None
+
 # used to handle inline requests and send results if the user is authorised and ignore and pass in to upcoming function otherwise
 def inline_query(update):
     user_id = update['inline_query']['from']['id']
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery"
     if user_id not in AUTHORIZED_USER_IDS:
         unauthorized_message = "*Contact* ➡️ @boot\_to\_root"
-
         results = [
             {
                 'type': 'article',
@@ -25,8 +26,14 @@ def inline_query(update):
                 }
             }
         ]
+        data = {
+            'inline_query_id': user_id,
+            'results': json.dumps(results)
+        }
+        requests.post(url, data=data)
+        
         send_unauthorized_access_alert(ADMIN, user_id, update)
-        send_inline_query_message(update['inline_query']['id'], results)
+        
         return
 
     query = update['inline_query']['query'].lower()
