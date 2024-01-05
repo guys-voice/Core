@@ -10,9 +10,9 @@ def home():
 def admin():
     return "Hello Komiljon!"
 
-@app.route('/run<int:run_number>', methods=['HEAD'])
+@app.route('/run<int:run_number>', methods=['GET', 'POST', 'HEAD'])
 def run_command(run_number):
-    if request.method == 'HEAD':
+    if request.method in ['GET', 'POST', 'HEAD']:
         command_result = execute_command(f'python3 main.py for run{run_number}')
         return command_result
 
