@@ -166,9 +166,9 @@ def main():
             global last_update_id
             if 'inline_query' in update:
                 inline_query(update)
-            elif 'message' in update and 'text' in update['message'] and update['inline_query']['from']['id'] in AUTHORIZED_USER_IDS:
+            elif 'message' in update and 'text' in update['message'] and update['message']['from']['id'] in AUTHORIZED_USER_IDS:
                 send_actual_voices_to_dm(update)
-            elif update['inline_query']['from']['id'] not in AUTHORIZED_USER_IDS:
+            elif update['message']['from']['id'] not in AUTHORIZED_USER_IDS:
                 send_unauthorized_access_alert(ADMIN, update['inline_query']['from']['id'], update)
             last_update_id = update['update_id'] + 1
 
