@@ -1,8 +1,8 @@
 import os
+import json
+import requests
 from uuid import uuid4
 from datetime import datetime, timedelta
-import requests
-import json
 
 # here are the global variables
 
