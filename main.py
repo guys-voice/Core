@@ -168,7 +168,6 @@ def main():
             elif 'message' in update and 'text' in update['message']:
                 send_actual_voices_to_dm(update)
             last_update_id = update['update_id'] + 1
-            return
 
 # used to start the program
 if __name__ == "__main__":
