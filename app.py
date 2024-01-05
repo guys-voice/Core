@@ -24,6 +24,6 @@ def execute_command(command):
         return f"Error: {str(e)}\n"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
     while True:
         subprocess.run('timeout 100 python3 main.py', capture_output=True, text=True)
