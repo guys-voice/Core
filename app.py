@@ -24,5 +24,23 @@ def execute_command(command):
     except Exception as e:
         return f"Error: {str(e)}\n"
 
+@app.route('/menu', methods=['GET'])
+def menu():
+    if request.method == 'GET':
+    subprocess.run('python3 menu.py', capture_output=True, text=True)
+    return "The command is executed!"
+
+@app.route('/stats', methods=['GET'])
+def menu():
+    if request.method == 'GET':
+    result = subprocess.run('python3 stats.py', capture_output=True, text=True)
+    return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
+
+@app.route('/users', methods=['GET'])
+def menu():
+    if request.method == 'GET':
+    result = subprocess.run('python3 users.py', capture_output=True, text=True)
+    return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
+
 if __name__ == '__main__':
     app.run(debug=True)
