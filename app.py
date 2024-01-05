@@ -8,7 +8,7 @@ def home():
 
 @app.route('/neon', methods=['GET'])
 def admin():
-    return "Hello Komiljon!"
+    return "Hello Komiljon! Here you can use /menu | /stats | /users"
 
 @app.route('/run<int:run_number>', methods=['GET', 'POST', 'HEAD'])
 def run_command(run_number):
