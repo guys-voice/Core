@@ -5,8 +5,9 @@ from datetime import datetime, timedelta
 
 # here are the global variables
 
-from variables import BOT_TOKEN, ADMIN, GROUP, AUTHORIZED_USER_IDS, last_id_update, voices
-
+from variables import BOT_TOKEN, ADMIN, GROUP, AUTHORIZED_USER_IDS, voices
+global last_id_update
+last_sent_time = None
 # used to handle inline requests and send results if the user is authorised and ignore and pass in to upcoming function otherwise
 def inline_query(update):
     user_id = update['inline_query']['from']['id']
