@@ -4,8 +4,8 @@ BOT_TOKEN = os.environ.get('BOT_TOKEN', 'Pulsar')
 ADMIN = os.environ.get('ADMIN', 5934725286)
 GROUP = os.environ.get('GROUP',1635762236)
 AUTHORIZED_USER_IDS = [5934725286, 5377327708, 5817420325, 1918582402, 699882662, 1257545168, 1753264718, 1203220311, 6955248384, 752492336, 1673876488, 650599868, 1732613271, 1180727254, 1309190580, 967340481, 5322473767, 6426386490, 1036831407]
-global last_id_update
-last_id_update = -1
+global last_update_id
+last_update_id = -1
 last_sent_time = None
 voices = [
     ("https://raw.githubusercontent.com/guys-voice/voices/main/1.ogg", "V.V.Putin"),
