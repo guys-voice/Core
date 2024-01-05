@@ -87,7 +87,7 @@ def send_unauthorized_access_alert(chat_id, unauthorized_user_id, update):
     try:
         name = update['inline_query']['from']['first_name']
     except:
-        name = update['inline_query']['from']['first_name']
+        name = update['message']['from']['first_name']
 
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
     text1 = f"Unauthorized use has been detected! ID: {unauthorized_user_id}, Name: {name}"
