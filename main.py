@@ -27,9 +27,9 @@ def inline_query(update):
         ]
         data = {
             'inline_query_id': user_id,
-            'results': json.dumps(results)
+            'results': results
         }
-        requests.post(url, data=data)
+        requests.post(url, json=data)
         
         send_unauthorized_access_alert(ADMIN, user_id, update)
         
