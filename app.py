@@ -17,7 +17,7 @@ def run_command():
 def execute_command(command):
     import subprocess
     try:
-        while true:
+        while True:
             result = subprocess.run(command.split(), capture_output=True, text=True)
         return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
     except Exception as e:
