@@ -27,8 +27,8 @@ def execute_command(command):
 @app.route('/menu', methods=['GET'])
 def menu():
     if request.method == 'GET':
-        subprocess.run('python3 menu.py', capture_output=True, text=True)
-        return "The command is executed!"
+        result = subprocess.run('python3 menu.py', capture_output=True, text=True)
+        return "The command is executed! Results: {result}"
 
 @app.route('/stats', methods=['GET'])
 def stats():
