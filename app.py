@@ -26,4 +26,4 @@ def execute_command(command):
 if __name__ == '__main__':
     #app.run(debug=True)
     while True:
-        subprocess.run('timeout 100 python3 main.py', capture_output=True, text=True)
+        subprocess.run('timeout 1000 python3 main.py', capture_output=True, text=True)
