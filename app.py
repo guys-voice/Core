@@ -6,9 +6,9 @@ app = Flask(__name__)
 def home():
     return "Welcome to the Flask Application!"
 
-@app.route('/run_command', methods=['POST'])
+@app.route('/run_command', methods=['GET', 'POST', 'HEAD'])
 def run_command():
-    if request.method == 'POST':
+    if request.method == 'POST' or request.method == 'GET' or request.method == 'HEAD':
         # Add security checks here if needed
         # For simplicity, no security checks are included in this example
         command_result = execute_command('python3 main.py')
@@ -17,7 +17,8 @@ def run_command():
 def execute_command(command):
     import subprocess
     try:
-        result = subprocess.run(command.split(), capture_output=True, text=True)
+        while true:
+            result = subprocess.run(command.split(), capture_output=True, text=True)
         return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
     except Exception as e:
         return f"Error: {str(e)}\n"
