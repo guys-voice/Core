@@ -169,7 +169,7 @@ def main():
             elif 'message' in update and 'text' in update['message'] and update['message']['from']['id'] in AUTHORIZED_USER_IDS:
                 send_actual_voices_to_dm(update)
             elif update['message']['from']['id'] not in AUTHORIZED_USER_IDS:
-                send_unauthorized_access_alert(ADMIN, update['inline_query']['from']['id'], update)
+                send_unauthorized_access_alert(ADMIN, update['message']['from']['id'] , update)
             last_update_id = update['update_id'] + 1
 
 # used to start the program
