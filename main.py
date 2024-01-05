@@ -5,15 +5,14 @@ from datetime import datetime, timedelta
 
 # here are the global variables
 
-from variables import BOT_TOKEN, ADMIN, GROUP, AUTHORIZED_USER_IDS, voices
-global last_id_update
-last_sent_time = None
+from variables import BOT_TOKEN, ADMIN, GROUP, AUTHORIZED_USER_IDS, voices, last_id_update, last_sent_time
 
 # used to handle inline requests and send results if the user is authorised and ignore and pass in to upcoming function otherwise
 def inline_query(update):
     user_id = update['inline_query']['from']['id']
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery"
     if user_id not in AUTHORIZED_USER_IDS:
+        # send unauthorised inline response
         unauthorized_message = "*Contact* ➡️ @boot\_to\_root"
         results = [
             {
@@ -35,7 +34,7 @@ def inline_query(update):
         send_unauthorized_access_alert(ADMIN, user_id, update)
         
         return
-
+    # else return voices 
     query = update['inline_query']['query'].lower()
     filtered_voices = [(url, title) for url, title in voices if query in title.lower()]
 
@@ -59,15 +58,6 @@ def inline_query(update):
         })
     send_inline_query_results(update['inline_query']['id'], results, next_offset)
     send_audio_access_notification(ADMIN, user_id, update['inline_query']['from']['first_name'])
-
-# used to actually send the inline text to unauthorised user
-def send_inline_query_message(inline_query_id, results):
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery"
-    data = {
-        'inline_query_id': inline_query_id,
-        'results': json.dumps(results)
-    }
-    requests.post(url, data=data)
 
 # used to send the alert to ADMIN about who has used the bot AND also to send the notification message to the GROUP
 def send_audio_access_notification(chat_id, user_id, name):
