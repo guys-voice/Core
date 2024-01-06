@@ -25,3 +25,4 @@ def send_show_options_to_users():
             print(f"Failed to send options to user {user_id}: {response.content}")
         else:
             print(f"Successfully sent to user {user_id}")
+# stats, users, neon kabi functionla shu yerda bo'ladi bulani ham webdan ham botdan turib ishlatsa bo'ladi preferable webdan faqat keep alivega ishlataman va qolganini sirli commandla bilan qilaman.
