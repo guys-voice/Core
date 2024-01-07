@@ -18,10 +18,10 @@ def main():
                 user_id = update['inline_query']['from']['id']
                 if user_id in AUTHORIZED_USER_IDS:
                     log.log_auth(update)
-                    inline.inline_query(update)
+                    inline.inline_query(update, update['inline_query']['offset'])
                     #inline.inline_auth(user_id, update['inline_query']['query'].lower(), update['inline_query']['offset'])
                 else:
-                    inline.inline_query(update)
+                    inline.inline_query(update, update['inline_query']['offset'])
                     #inline.inline_unauth(user_id)
                     log.log_unauth(update)
             elif 'message' in update:
