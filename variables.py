@@ -8,7 +8,7 @@ COMMANDS = ['/start', '/show', '/stats', '/neon']
 global last_update_id
 last_update_id = -1
 last_sent_time = None
-voices = [
+VOICES = [
     ("https://raw.githubusercontent.com/guys-voice/voices/main/1.ogg", "V.V.Putin"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/2.ogg", "Kulib qoydim sanga, shavkat"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/3.ogg", "Kulib qoydim"),
