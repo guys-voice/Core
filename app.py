@@ -24,12 +24,12 @@ def execute_command(command):
     except Exception as e:
         return f"Error: {str(e)}\n"
 
-@app.route('/core', methods=['GET'])
-def core():
-    import subprocess
-    if request.method == 'GET':
-        result = subprocess.run('timeout 1 python3 run_infinetely.py', capture_output=True, text=True)
-        return "The command is executed! Results: {result}"
+#@app.route('/core', methods=['GET'])
+#def core():
+#    import subprocess
+#    if request.method == 'GET':
+#        result = subprocess.run('timeout 1 python3 run_infinetely.py', capture_output=True, text=True)
+#        return "The command is executed! Results: {result}"
 
 #@app.route('/stats', methods=['GET'])
 #def stats():
