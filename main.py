@@ -24,12 +24,13 @@ def main():
                     log.log_unauth(update)
             elif 'message' in update:
                 user_id = update['message']['from']['id']
+                message = update['message']['text']
                 if user_id in AUTHORIZED_USER_IDS:
                     log.log_auth(update)
-                    if any(update['message']['text'] == voice[1] for voice in VOICES): #not efficient though
-                        voice.message_auth_voice(user_id, update['message']['text'])
-                    elif update['message']['text'] in COMMANDS:
-                        commands.commands()
+                    if any(message == voice[1] for voice in VOICES): #not efficient though
+                        voice.message_auth_voice(user_id, message)
+                    elif message in COMMANDS:
+                        commands.commands(message)
                     else:
                         log.ignore()
                         log.log_ignore(update)
