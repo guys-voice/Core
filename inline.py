@@ -4,8 +4,7 @@ from uuid import uuid4
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, last_update_id, last_sent_time
 
 def inline_unauth(update):
-    user_id = update['inline_query']['from']['id']
-    if user_id not in AUTHORIZED_USER_IDS:
+    if update['inline_query']['from']['id'] not in AUTHORIZED_USER_IDS:
         unauthorized_message = "*Contact* ➡️ @boot\_to\_root"
         results = [
             {
@@ -25,7 +24,7 @@ def inline_unauth(update):
         requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery", data=data)
         return
         
-def inline_auth(update)
+def inline_auth(update):
     off = update['inline_query']['offset']
     user_id = update['inline_query']['from']['id']
     query = update['inline_query']['query'].lower()
