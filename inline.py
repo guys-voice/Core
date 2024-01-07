@@ -3,8 +3,9 @@ import requests
 from uuid import uuid4
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, last_update_id, last_sent_time
 
-def inline_query(update, off):
+def inline_query(update):
     user_id = update['inline_query']['from']['id']
+    off = update['inline_query']['offset']
     if user_id not in AUTHORIZED_USER_IDS:
         unauthorized_message = "*Contact* ➡️ @boot\_to\_root"
 
