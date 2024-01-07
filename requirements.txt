@@ -1,7 +1,6 @@
 uuid
 datetime
 requests
-jsond
 urllib3==1.26.8
 flask
 gunicorn
