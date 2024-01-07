@@ -32,12 +32,12 @@ def commands(user_id, name, message):
         with open('users.txt', 'r') as file:
             lines = file.readlines()
             number_of_users = len(lines)
-            data = {
-                'chat_id': user_id,
-                'text': f"Currently, we have {number_of_users} users.",
-                'parse_mode': 'Markdown'
-            }
-            requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
+        data = {
+            'chat_id': user_id,
+            'text': f"Currently, we have {number_of_users} users.",
+            'parse_mode': 'Markdown'
+        }
+        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
     elif message == '/stats':
         data = {
             'chat_id': user_id,
