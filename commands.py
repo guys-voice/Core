@@ -1,4 +1,4 @@
-from variables import BOT_TOKEN, AUTHORIZED_USER_IDS, voices
+from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, voices, last_update_id, last_sent_time
 
 def send_show_options_to_users():
     for user_id in AUTHORIZED_USER_IDS:
