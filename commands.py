@@ -1,5 +1,6 @@
 import json
 import requests
+import subprocess
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, last_update_id, last_sent_time
 
 def commands(user_id, name, message):
@@ -49,6 +50,18 @@ def commands(user_id, name, message):
         data = {
             'chat_id': user_id,
             'text': f"Hello {name}, you have successfully logged in as a root user!",
+            'parse_mode': 'Markdown'
+        }
+        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
+    elif message == '/test':
+        try:
+            subprocess.run(['python3', 'main.py'])
+            response_text = "Command executed successfully."
+        except Exception as e:
+            response_text = f"Error executing command: {e}"
+        data = {
+            'chat_id': user_id,
+            'text': response_text,
             'parse_mode': 'Markdown'
         }
         requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
