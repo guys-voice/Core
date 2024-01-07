@@ -1,9 +1,11 @@
 import requests
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, last_update_id, last_sent_time
 
-def commands(user_id, message):
+def commands(user_id, name, message):
     if message == '/start':
-        return
+        if not any(user_id in line for line in open('users.txt')):
+        with open('users.txt', 'a') as file:
+            file.write(f"{user_id} {name}\n")
     elif message == '/show':
         return
     elif message == '/users':
