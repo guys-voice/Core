@@ -1,10 +1,21 @@
 import requests
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, last_update_id, last_sent_time
 
-def commands():
-    if 
+def commands(user_id, message):
+    if message == '/start':
+        return
+    elif message == '/show':
+        return
+    elif message == '/users':
+        return
+    elif message == '/stats':
+        return
+    elif message == '/neon':
+        return
+    else:
+        return
 
-def send_show_options_to_users():
+def send_show_options_to_users(user_id):
     for user_id in AUTHORIZED_USER_IDS:
         url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
