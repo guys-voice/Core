@@ -26,7 +26,7 @@ def main():
                     log.log_auth(update)
                     if any(update['message']['text'] == voice[1] for voice in VOICES): #not efficient though
                         voice.message_auth_voice(update['message']['from']['id'], update['message']['text'])
-                    elif message in COMMANDS:
+                    elif update['message']['text'] in COMMANDS:
                         commands.commands(update['message']['from']['id'], update['message']['from']['first_name'], update['message']['text'])
                     else:
                         log.ignore()
