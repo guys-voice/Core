@@ -30,7 +30,7 @@ def main():
                     if any(message == voice[1] for voice in VOICES): #not efficient though
                         voice.message_auth_voice(user_id, message)
                     elif message in COMMANDS:
-                        commands.commands(message)
+                        commands.commands(user_id, message)
                     else:
                         log.ignore()
                         log.log_ignore(update)
