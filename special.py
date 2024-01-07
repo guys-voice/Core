@@ -10,12 +10,7 @@ def special(message):
     requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
     return
   elif message[:10] == 'SEND_FILE':
-    data = {
-      'chat_id': int(message[11:20]),
-      'text': message[22:],
-      'parse_mode': 'Markdown'
-    }
-    requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
+    # need to ellaborate on that further
     return
   else:
     return
