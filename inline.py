@@ -4,35 +4,29 @@ from uuid import uuid4
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, last_update_id, last_sent_time
 
 def inline_unauth(update):
-    if update['inline_query']['from']['id'] not in AUTHORIZED_USER_IDS:
-        unauthorized_message = "*Contact* ➡️ @boot\_to\_root"
-        results = [
-            {
-                'type': 'article',
-                'id': str(uuid4()),
-                'title': "Access denied!",
-                'input_message_content': {
-                    'message_text': unauthorized_message,
-                    'parse_mode': 'Markdown'
-                }
+    results = [
+        {
+            'type': 'article',
+            'id': str(uuid4()),
+            'title': "Access denied!",
+            'input_message_content': {
+                'message_text': "*Contact* ➡️ @boot\_to\_root",
+                'parse_mode': 'Markdown'
             }
-        ]
-        data = {
-            'inline_query_id': update['inline_query']['id'],
-            'results': json.dumps(results)
         }
-        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery", data=data)
-        return
+    ]
+    data = {
+        'inline_query_id': update['inline_query']['id'],
+        'results': json.dumps(results)
+    }
+    requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery", data=data)
         
 def inline_auth(update):
-    off = update['inline_query']['offset']
-    user_id = update['inline_query']['from']['id']
-    query = update['inline_query']['query'].lower()
-    filtered_voices = [(url, title) for url, title in VOICES if query in title.lower()]
-    offset = int(off) if off and off != 'null' else 0
+    filtered_voices = [(url, title) for url, title in VOICES if update['inline_query']['query'].lower() in title.lower()]
+    offset = int(update['inline_query']['offset']) if update['inline_query']['offset'] and update['inline_query']['offset'] != 'null' else 0
     next_offset = str(offset + 20) if offset + 20 < len(VOICES) else ''
     results = []
-    if user_id == ADMIN:
+    if update['inline_query']['from']['id'] == ADMIN:
         caption = '෴'
     else:
         caption = ''
@@ -44,16 +38,12 @@ def inline_auth(update):
             'type': 'voice',
             'caption': caption #(caption function doesnot work as expected)
         })
-    send_inline_query_results(update['inline_query']['id'], results, next_offset)
-    
-def send_inline_query_results(inline_query_id, results, offset):
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery"
     data = {
-        'inline_query_id': inline_query_id,
+        'inline_query_id': update['inline_query']['id'],
         'results': results,
-        'next_offset': offset
+        'next_offset': next_offset
     }
     headers = {
         'Content-Type': 'application/json'
     }
-    requests.post(url, json=data, headers=headers)
+    requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery", json=data, headers=headers)
