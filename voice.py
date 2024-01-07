@@ -1,3 +1,4 @@
+import requests
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, voices, last_update_id, last_sent_time
 
 def message_unauth(user_id):
