@@ -7,8 +7,7 @@ from datetime import datetime, timedelta
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, voices, last_update_id, last_sent_time
 
 # importing core functions
-import voice, commands, log
-from inline import inline_auth
+import voice, inline, commands, log
 
 def main():
     global last_update_id
@@ -19,7 +18,7 @@ def main():
                 user_id = update['inline_query']['from']['id']
                 if user_id in AUTHORIZED_USER_IDS:
                     log.log_auth(update)
-                    inline_auth(user_id, update['inline_query']['query'].lower(), update['inline_query']['offset'])
+                    inline.inline_auth(user_id, update['inline_query']['query'].lower(), update['inline_query']['offset'])
                 else:
                     inline.inline_unauth()
                     log.log_unauth()
