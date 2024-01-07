@@ -10,20 +10,20 @@ def home():
 #def admin():
 #    return "Hello Komiljon! Here you can use /menu | /stats | /users"
 #
-#@app.route('/run<int:run_number>', methods=['GET', 'POST', 'HEAD'])
-#def run_command(run_number):
-#    if request.method in ['GET', 'POST', 'HEAD']:
-#        command_result = execute_command(f'python3 main.py for run{run_number}')
-#        return command_result
-#
-#def execute_command(command):
-#    import subprocess
-#    try:
-#        result = subprocess.run(command.split(), capture_output=True, text=True)
-#        return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
-#    except Exception as e:
-#        return f"Error: {str(e)}\n"
-#
+@app.route('/run<int:run_number>', methods=['GET', 'POST', 'HEAD'])
+def run_command(run_number):
+    if request.method in ['GET', 'POST', 'HEAD']:
+        command_result = execute_command(f'python3 main.py for run{run_number}')
+        return command_result
+
+def execute_command(command):
+    import subprocess
+    try:
+        result = subprocess.run(command.split(), capture_output=True, text=True)
+        return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
+    except Exception as e:
+        return f"Error: {str(e)}\n"
+
 @app.route('/core', methods=['GET'])
 def core():
     import subprocess
