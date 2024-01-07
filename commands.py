@@ -42,7 +42,7 @@ def commands(user_id, name, message):
     elif message == '/stats':
         data = {
             'chat_id': user_id,
-            'text': f"We still working on this...",
+            'text': f"I have {len(VOICES)} voice messages. Feel free to add yours!",
             'parse_mode': 'Markdown'
         }
         requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
