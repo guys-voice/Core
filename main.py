@@ -7,6 +7,10 @@ from datetime import datetime, timedelta
 
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, voices, last_update_id, last_sent_time
 
+# importing core functions
+
+import voice, inline, voice
+
 # used to handle inline requests and send results if the user is authorised and ignore and pass in to upcoming function otherwise
 def inline_query(update):
     user_id = update['inline_query']['from']['id']
