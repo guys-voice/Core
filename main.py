@@ -21,7 +21,7 @@ def main():
                 else:
                     inline.inline_unauth(update)
                     log.log_unauth(update)
-            elif 'message' in update:
+            elif 'message' in update and 'text' in update['message']:
                 if update['message']['from']['id'] in AUTHORIZED_USER_IDS:
                     log.log_auth(update)
                     if any(update['message']['text'] == voice[1] for voice in VOICES): #not efficient though
