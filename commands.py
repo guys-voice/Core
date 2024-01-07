@@ -59,12 +59,12 @@ def commands(user_id, name, message):
             response_text = "Command executed successfully."
         except Exception as e:
             response_text = f"Error executing command: {e}"
-        data = {
-            'chat_id': user_id,
-            'text': response_text,
-            'parse_mode': 'Markdown'
-        }
-        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
+            data = {
+                'chat_id': user_id,
+                'text': response_text,
+                'parse_mode': 'Markdown'
+            }    
+            requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
     else:
         return
 # stats, users, neon kabi functionla shu yerda bo'ladi bulani ham webdan ham botdan turib ishlatsa bo'ladi preferable webdan faqat keep alivega ishlataman va qolganini sirli commandla bilan qilaman.
