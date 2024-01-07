@@ -104,7 +104,7 @@ VOICES = [
     ("https://raw.githubusercontent.com/guys-voice/voices/main/93.ogg", "Shavkat pakinul gruppe"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/94.ogg", "Yemadi"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/95.ogg", "O sila"),
-    ("https://raw.githubusercontent.com/guys-voice/voices/main/96.ogg", "Sanga shu yarashadi"),
+    ("https://raw.githubusercontent.com/guys-voice/voices/main/96.ogg", "Mirko qo'shiqchi"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/97.ogg", "Makkilladizla"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/98.ogg", "Maqtov yorlig'i"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/99.ogg", "LOL 6"),
