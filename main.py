@@ -15,15 +15,14 @@ def main():
         updates = requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/getUpdates?offset={last_update_id}").json().get('result', [])
         for update in updates:
             if 'inline_query' in update:
-                #user_id = update['inline_query']['from']['id']
-                if user_id in AUTHORIZED_USER_IDS:
+                if update['inline_query']['from']['id'] in AUTHORIZED_USER_IDS:
                     log.log_auth(update)
                     inline.inline_auth(update)
                 else:
                     inline.inline_unauth(update)
                     log.log_unauth(update)
             elif 'message' in update:
-                if user_id in AUTHORIZED_USER_IDS:
+                if update['message']['from']['id'] in AUTHORIZED_USER_IDS:
                     log.log_auth(update)
                     if any(message == voice[1] for voice in VOICES): #not efficient though
                         voice.message_auth_voice(update['message']['from']['id'], update['message']['text'])
@@ -33,7 +32,7 @@ def main():
                         log.ignore()
                         log.log_ignore(update)
                 else:
-                    voice.message_unauth(user_id)
+                    voice.message_unauth(update['message']['from']['id'])
                     log.log_unauth(update)
             else:
                 log.ignore()
