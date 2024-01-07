@@ -28,7 +28,7 @@ def commands(user_id, name, message):
         }
         requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
         
-    elif message == '/users':
+    elif message == '/users': # not working still
         with open('users.txt', 'r') as file:
             lines = file.readlines()
             number_of_users = len(lines)
