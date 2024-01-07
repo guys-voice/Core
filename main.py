@@ -24,7 +24,7 @@ def main():
             elif 'message' in update:
                 if update['message']['from']['id'] in AUTHORIZED_USER_IDS:
                     log.log_auth(update)
-                    if any(message == voice[1] for voice in VOICES): #not efficient though
+                    if any(update['message']['text'] == voice[1] for voice in VOICES): #not efficient though
                         voice.message_auth_voice(update['message']['from']['id'], update['message']['text'])
                     elif message in COMMANDS:
                         commands.commands(update['message']['from']['id'], update['message']['from']['first_name'], update['message']['text'])
