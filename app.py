@@ -26,6 +26,7 @@ def execute_command(command):
 
 @app.route('/menu', methods=['GET'])
 def menu():
+    import subprocess
     if request.method == 'GET':
         result = subprocess.run('timeout 29 python3 main.py', capture_output=True, text=True)
         subprocess.run('timeout 1 curl -X GET https://neon-fkki.onrender.com/menu', capture_output=True, text=True)
