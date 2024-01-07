@@ -9,7 +9,7 @@ from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, vo
 
 # importing core functions
 
-import voice, inline, voice
+import voice, inline, log
 
 # used to handle inline requests and send results if the user is authorised and ignore and pass in to upcoming function otherwise
 def inline_query(update):
