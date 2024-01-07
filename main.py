@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, voices, last_update_id, last_sent_time
 
 # importing core functions
-import voice, inline, log
+import voice, inline, commands, log
 
 def main():
     global last_update_id
