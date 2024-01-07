@@ -1,5 +1,3 @@
-import VOICES from variables # importing this to only main.py is good enough
-
 def inline_unauth(user_id):
     results = [
         {
