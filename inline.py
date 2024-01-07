@@ -23,10 +23,10 @@ def inline_query(update):
         return
 
     query = update['inline_query']['query'].lower()
-    filtered_voices = [(url, title) for url, title in voices if query in title.lower()]
+    filtered_voices = [(url, title) for url, title in VOICES if query in title.lower()]
 
     offset = int(update['inline_query']['offset']) if update['inline_query']['offset'] and update['inline_query']['offset'] != 'null' else 0
-    next_offset = str(offset + 20) if offset + 20 < len(voices) else ''
+    next_offset = str(offset + 20) if offset + 20 < len(VOICES) else ''
 
     results = []
 
