@@ -53,8 +53,6 @@ def send_inline_query_message(inline_query_id, results):
         'results': json.dumps(results)
     }
     requests.post(url, data=data)
-    }
-    requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery", json=data, headers=headers)
 
 def send_inline_query_results(inline_query_id, results, offset):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery"
