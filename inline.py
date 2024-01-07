@@ -3,7 +3,8 @@ import requests
 from uuid import uuid4
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, last_update_id, last_sent_time
 
-def inline_query(user_id, query, off):
+def inline_query(update, off):
+    user_id = update['inline_query']['from']['id']
     if user_id not in AUTHORIZED_USER_IDS:
         unauthorized_message = "*Contact* ➡️ @boot\_to\_root"
 
@@ -18,8 +19,10 @@ def inline_query(user_id, query, off):
                 }
             }
         ]
-        send_inline_query_message(user_id, results)
+        send_inline_query_message(update['inline_query']['id'], results)
         return
+
+    query = update['inline_query']['query'].lower()
     filtered_voices = [(url, title) for url, title in VOICES if query in title.lower()]
 
     offset = int(off) if off and off != 'null' else 0
@@ -40,7 +43,7 @@ def inline_query(user_id, query, off):
             'type': 'voice',
             'caption': caption #(caption function doesnot work as expected)
         })
-    send_inline_query_results(user_id, results, next_offset)
+    send_inline_query_results(update['inline_query']['id'], results, next_offset)
 
 # used to actually send the inline text to unauthorised user
 def send_inline_query_message(inline_query_id, results):
