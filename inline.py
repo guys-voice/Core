@@ -3,7 +3,7 @@ import requests
 from uuid import uuid4
 from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, last_update_id, last_sent_time
 
-def inline_query(update):
+def inline_query(update, off):
     user_id = update['inline_query']['from']['id']
     if user_id not in AUTHORIZED_USER_IDS:
         unauthorized_message = "*Contact* ➡️ @boot\_to\_root"
@@ -25,7 +25,7 @@ def inline_query(update):
     query = update['inline_query']['query'].lower()
     filtered_voices = [(url, title) for url, title in VOICES if query in title.lower()]
 
-    offset = int(update['inline_query']['offset']) if update['inline_query']['offset'] and update['inline_query']['offset'] != 'null' else 0
+    offset = int(off) if off and off != 'null' else 0
     next_offset = str(offset + 20) if offset + 20 < len(VOICES) else ''
 
     results = []
