@@ -8,7 +8,6 @@ def inline_query(update):
     off = update['inline_query']['offset']
     if user_id not in AUTHORIZED_USER_IDS:
         unauthorized_message = "*Contact* ➡️ @boot\_to\_root"
-
         results = [
             {
                 'type': 'article',
@@ -20,7 +19,11 @@ def inline_query(update):
                 }
             }
         ]
-        send_inline_query_message(update['inline_query']['id'], results)
+        data = {
+            'inline_query_id': update['inline_query']['id'],
+            'results': json.dumps(results)
+        }
+        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery", data=data)
         return
 
     query = update['inline_query']['query'].lower()
