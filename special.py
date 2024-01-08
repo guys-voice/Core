@@ -3,7 +3,7 @@ from variables import ADMIN
 
 
 def special(message):
-  if message[:12] == 'SEND_MESSAGE':
+  if 1==1: #message[:12] == 'SEND_MESSAGE':
     data = {
       'chat_id': ADMIN,
       'text': f"id: {message[13:23]} and message: {message[24:]}",
