@@ -284,7 +284,7 @@ VOICES = [
     ("https://raw.githubusercontent.com/guys-voice/voices/main/272.ogg", "Tojikmi shumo"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/273.ogg", "Yopishtirdim har doimgiday"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/274.ogg", "Tasvirlab ber"),
-    ("https://raw.githubusercontent.com/guys-voice/voices/main/275.ogg", "Jiyanchasi bo'lasan),
+    ("https://raw.githubusercontent.com/guys-voice/voices/main/275.ogg", "Jiyanchasi bo'lasan"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/276.ogg", "Manga raxmat de"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/277.ogg", "Bitta raxamt de bo'lli"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/278.ogg", "Maqsad bor deyopti"),
