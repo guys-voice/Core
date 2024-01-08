@@ -29,7 +29,7 @@ def commands(user_id, name, message):
         }
         requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
     elif message == '/list':
-        titles = [f"`{voice[1]}`" for voice in VOICES]
+        titles = [f"{voice[1]}" for voice in VOICES]
         formatted_titles = "\n".join(titles)
         response_message = f"List of Voices:\n{formatted_titles}"
         data = {
