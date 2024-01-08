@@ -348,3 +348,4 @@ VOICES = [
     ("https://raw.githubusercontent.com/guys-voice/voices/main/336.ogg", "Qiyomatli akam"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/337.ogg", "Oh no no"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/338.ogg", "J deb yuborganding")
+]
