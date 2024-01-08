@@ -1,7 +1,7 @@
 import json
 import requests
 from uuid import uuid4
-from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, last_update_id, last_sent_time
+from variables import BOT_TOKEN, ADMIN, VOICES
 
 def inline_unauth(update):
     results = [
