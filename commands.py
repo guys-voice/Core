@@ -17,24 +17,27 @@ def commands(user_id, name, message):
             
     elif message == '/show':
         options = [voice[1] for voice in VOICES]
-        chunks = [options[i:i + 20] for i in range(0, len(options), 20)]
-        inline_keyboard = [
-            [{"text": title, "callback_data": f"voice_option:{title}"}] for title in chunks[0]
-        ]
-        inline_keyboard.append([{"text": "Next", "callback_data": f"next_page:1"}])
-        reply_markup = {"inline_keyboard": inline_keyboard}
-        text = "Choose a voice title:"
+        keyboard = {
+            'keyboard': [[option] for option in options],
+            'one_time_keyboard': True,
+            'resize_keyboard': True
+        }
         data = {
             'chat_id': user_id,
-            'text': text,
-            'reply_markup': json.dumps(reply_markup)
+            'text': "Choose a voice title. I will send the voice message.",
+            'reply_markup': json.dumps(keyboard)
         }
-        response = requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
-        if response.status_code != 200:
-            print(f"Failed to send options to user {user_id}: {response.content}")
-        else:
-            print(f"Successfully sent to user {user_id}")
-        
+        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
+    elif message == '/list':
+        titles = [f"`{voice[1]}`" for voice in VOICES]
+        formatted_titles = "\n".join(titles)
+        response_message = f"List of Voices:\n{formatted_titles}"
+        data = {
+            'chat_id': user_id,
+            'text': response_message,
+            'parse_mode': 'Markdown'
+        }
+        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
     elif message == '/users': # not working still
         with open('users.txt', 'r') as file:
             lines = file.readlines()
