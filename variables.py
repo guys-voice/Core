@@ -347,5 +347,9 @@ VOICES = [
     ("https://raw.githubusercontent.com/guys-voice/voices/main/335.ogg", "Nomer sotadigan bor"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/336.ogg", "Qiyomatli akam"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/337.ogg", "Oh no no"),
-    ("https://raw.githubusercontent.com/guys-voice/voices/main/338.ogg", "J deb yuborganding")
+    ("https://raw.githubusercontent.com/guys-voice/voices/main/338.ogg", "J deb yuborganding"),
+    ("https://raw.githubusercontent.com/guys-voice/voices/main/339.ogg", "Omadingni ber"),
+    ("https://raw.githubusercontent.com/guys-voice/voices/main/340.ogg", "Fil"),
+    ("https://raw.githubusercontent.com/guys-voice/voices/main/341.ogg", "Random eshakcha"),
+    ("https://raw.githubusercontent.com/guys-voice/voices/main/342.ogg", "Ok")
 ]
