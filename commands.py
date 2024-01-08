@@ -37,7 +37,9 @@ def commands(user_id, name, message):
             'text': response_message,
             'parse_mode': 'Markdown'
         }
-        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
+        response = requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
+        print("API Response:", response.content)
+
     elif message == '/users': # not working still
         with open('users.txt', 'r') as file:
             lines = file.readlines()
