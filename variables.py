@@ -4,7 +4,7 @@ BOT_TOKEN = os.environ.get('BOT_TOKEN', 'Pulsar')
 ADMIN = os.environ.get('ADMIN', 5934725286)
 GROUP = os.environ.get('GROUP',1635762236)
 AUTHORIZED_USER_IDS = [5934725286, 5377327708, 5817420325, 1918582402, 699882662, 1257545168, 1753264718, 1203220311, 6955248384, 752492336, 1673876488, 650599868, 1732613271, 1180727254, 1309190580, 967340481, 5322473767, 6426386490, 10368310407, 1036831407]
-COMMANDS = ['/start', '/show', '/users', '/stats', '/test', '/neon']
+COMMANDS = ['/start', '/show', '/list', '/users', '/stats', '/test', '/neon']
 SPECIAL = ['SEND_MESSAGE', 'SEND_FILE']
 global last_update_id
 last_update_id = -1
