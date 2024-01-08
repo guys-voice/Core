@@ -29,17 +29,16 @@ def commands(user_id, name, message):
         }
         requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
     elif message == '/list':
-        titles = [f"{voice[1]}" for voice in VOICES]
-        formatted_titles = "\n".join(titles)
-        response_message = f"List of Voices:\n{formatted_titles}"
-        data = {
-            'chat_id': user_id,
-            'text': response_message,
-            'parse_mode': 'Markdown'
-        }
-        response = requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data)
-        print("API Response:", response.content)
-
+        for i in range(0, len([f"`{voice[1]}`" for voice in VOICES]), 100):
+            chunk = [f"`{voice[1]}`" for voice in VOICES][i:i + 100]
+            formatted_chunk = "\n".join(chunk)
+            response_message = f"List of Voices (Part {i // 100 + 1}):\n{formatted_chunk}"
+            data = {
+                'chat_id': user_id,
+                'text': response_message,
+                'parse_mode': 'Markdown'
+            }
+            requests.post(f"https://api.telegram.org/bot{bot}/sendMessage", data=data)
     elif message == '/users': # not working still
         with open('users.txt', 'r') as file:
             lines = file.readlines()
