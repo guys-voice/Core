@@ -28,7 +28,7 @@ def main():
                         voice.message_auth_voice(update['message']['from']['id'], update['message']['text'])
                     elif update['message']['text'] in COMMANDS:
                         commands.commands(update['message']['from']['id'], update['message']['from']['first_name'], update['message']['text'])
-                elif update['message']['text'][:12] == 'SEND_MESSAGE': #any(keyword in update['message']['text'][:12] for keyword in SPECIAL) and update['message']['from']['id'] == ADMIN:
+                    elif update['message']['text'][:12] == 'SEND_MESSAGE': #any(keyword in update['message']['text'][:12] for keyword in SPECIAL) and update['message']['from']['id'] == ADMIN:
                         special.special(update['message']['text'])
                     else:
                         log.ignore()
