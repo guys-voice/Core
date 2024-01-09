@@ -6,8 +6,12 @@ from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VO
 def commands(user_id, name, message):
     if message == '/start':
         if not any(str(user_id) in line for line in open('users.txt')):
-            with open('users.txt', 'a') as file:
-                file.write(f"{user_id} {name}\n")
+            try:
+                with open('users.txt', 'a') as file:
+                    file.write(f"{user_id} {name}\n")
+                file.close()
+            except Exception as e:
+                print(f"Error writing to file: {e}")
         data = {
             'chat_id': user_id,
             'text': f"Welcome {name}. Happy to see here.",
