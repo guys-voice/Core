@@ -170,7 +170,7 @@ VOICES = [
     ("https://raw.githubusercontent.com/guys-voice/voices/main/158.ogg", "Avtobus kutib o'tirimman"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/159.ogg", "Bordizlami"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/160.ogg", "Tax bo'llim boromman"),
-    ("https://raw.githubusercontent.com/guys-voice/voices/main/161.ogg", "Kelinni aytmadi boxa"),
+    #("https://raw.githubusercontent.com/guys-voice/voices/main/161.ogg", "Kelinni aytmadi boxa"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/162.ogg", "Kelinni oti jahona"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/163.ogg", "Juda off bo'lli"),
     ("https://raw.githubusercontent.com/guys-voice/voices/main/164.ogg", "Umman off bo'mapti"),
