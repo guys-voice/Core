@@ -6,9 +6,13 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return "Welcome to the Flask Application!"
+@app.route('/', methods=['POST'])
+def handle_webhook():
+    try:
+        process(json.loads(request.get_data()))
+        return 'Success!'
+    except Exception as e:
+        return e
 
 #@app.route('/neon', methods=['GET'])
 #def admin():
