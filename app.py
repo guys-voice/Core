@@ -14,42 +14,37 @@ def handle_webhook():
     except Exception as e:
         return e
 
-#@app.route('/neon', methods=['GET'])
-#def admin():
-#    return "Hello Komiljon! Here you can use /menu | /stats | /users"
-#
-@app.route('/run<int:run_number>', methods=['GET', 'POST', 'HEAD'])
-def run_command(run_number):
-    if request.method in ['GET', 'POST', 'HEAD']:
-        command_result = execute_command(f'python3 main.py for run{run_number}')
-        return command_result
+from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, SPECIAL, last_sent_time
 
-def execute_command(command):
-    import subprocess
-    try:
-        result = subprocess.run(command.split(), capture_output=True, text=True)
-        return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
-    except Exception as e:
-        return f"Error: {str(e)}\n"
+# importing core functions
+import voice, inline, commands, special, log
 
-#@app.route('/core', methods=['GET'])
-#def core():
-#    import subprocess
-#    if request.method == 'GET':
-#        result = subprocess.run('timeout 1 python3 run_infinetely.py', capture_output=True, text=True)
-#        return "The command is executed! Results: {result}"
-
-#@app.route('/stats', methods=['GET'])
-#def stats():
-#    if request.method == 'GET':
-#        result = subprocess.run('python3 stats.py', capture_output=True, text=True)
-#        return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
-#
-#@app.route('/users', methods=['GET'])
-#def users():
-#    if request.method == 'GET':
-#        result = subprocess.run('python3 users.py', capture_output=True, text=True)
-#        return f"Command Output: {result.stdout}\nCommand Error: {result.stderr}\n"
+def process(update):
+    if 'inline_query' in update:
+        if update['inline_query']['from']['id'] in AUTHORIZED_USER_IDS:
+            log.log_auth(update)
+            inline.inline_auth(update)
+        else:
+            inline.inline_unauth(update)
+            log.log_unauth(update)
+    elif 'message' in update and 'text' in update['message']:
+        if update['message']['from']['id'] in AUTHORIZED_USER_IDS:
+            log.log_auth(update)
+            if any(update['message']['text'] == voice[1] for voice in VOICES): #not efficient though
+                voice.message_auth_voice(update['message']['from']['id'], update['message']['text'])
+            elif update['message']['text'] in COMMANDS:
+                commands.commands(update['message']['from']['id'], update['message']['from']['first_name'], update['message']['text'])
+            elif update['message']['text'][:12] == 'SEND_MESSAGE': #any(keyword in update['message']['text'][:12] for keyword in SPECIAL) and update['message']['from']['id'] == ADMIN:
+                special.special(update['message']['text'])
+            else:
+                log.ignore()
+                log.log_ignore(update)
+        else:
+            voice.message_unauth(update['message']['from']['id'])
+            log.log_unauth(update)
+    else:
+        log.ignore()
+        log.log_ignore(update)
 
 if __name__ == '__main__':
     app.run(debug=True)
