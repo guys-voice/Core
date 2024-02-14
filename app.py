@@ -67,7 +67,3 @@ def manual():
 
 if __name__ == '__main__':
     app.run(debug=False)
-        log.log_ignore(update)
-
-if __name__ == '__main__':
-    app.run(debug=False)
