@@ -70,7 +70,7 @@ def send_voices():
         print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice",json={'chat_id': ADMIN, 'voice': line.split()[0], 'caption': line}).json())
 
 def voice():
-    with open('referral.txt', 'r') as file:
+    with open('voices.txt', 'r') as file:
         requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument",params={'chat_id': ADMIN},files={'document': ('voices.txt', io.StringIO(''.join(file.readlines())))})
     file.close()
     return
@@ -80,3 +80,5 @@ def manual():
 
 if __name__ == '__main__':
     app.run(debug=False)
+
+
