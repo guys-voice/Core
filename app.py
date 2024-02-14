@@ -1,8 +1,12 @@
 import json
-import requests
 from uuid import uuid4
+import requests
 from flask import Flask, request
-from datetime import datetime, timedelta
+
+BOT_TOKEN = '6966843961:AAH7Xd9joskzqexl--ixR1i0I25v6CyUPJw'
+ADMIN = 5934725286
+GROUP = 1635762236
+AUTHORIZED_USER_IDS = [5934725286, 5377327708, 5817420325, 1918582402, 699882662, 1257545168, 1753264718, 1203220311, 6955248384, 752492336, 1673876488, 650599868, 1732613271, 1180727254, 1309190580, 967340481, 5322473767, 6426386490, 1036831407]
 
 app = Flask(__name__)
 
@@ -12,38 +16,57 @@ def handle_webhook():
         process(json.loads(request.get_data()))
         return 'Success!'
     except Exception as e:
-        return e
-
-from variables import BOT_TOKEN, ADMIN, GROUP, COMMANDS, AUTHORIZED_USER_IDS, VOICES, SPECIAL, last_sent_time
-
-# importing core functions
-import voice, inline, commands, special, log
+        print(e)
+        return 'Error'
 
 def process(update):
-    if 'inline_query' in update:
-        if update['inline_query']['from']['id'] in AUTHORIZED_USER_IDS:
-            log.log_auth(update)
-            inline.inline_auth(update)
-        else:
-            inline.inline_unauth(update)
-            log.log_unauth(update)
-    elif 'message' in update and 'text' in update['message']:
-        if update['message']['from']['id'] in AUTHORIZED_USER_IDS:
-            log.log_auth(update)
-            if any(update['message']['text'] == voice[1] for voice in VOICES): #not efficient though
-                voice.message_auth_voice(update['message']['from']['id'], update['message']['text'])
-            elif update['message']['text'] in COMMANDS:
-                commands.commands(update['message']['from']['id'], update['message']['from']['first_name'], update['message']['text'])
-            elif update['message']['text'][:12] == 'SEND_MESSAGE': #any(keyword in update['message']['text'][:12] for keyword in SPECIAL) and update['message']['from']['id'] == ADMIN:
-                special.special(update['message']['text'])
+    if 'message' in update:
+        if update['message']['from']['id'] not in AUTHORIZED_USER_IDS:
+            return
+        if 'text' in update['message']:
+            if update['message']['text'] == '/mannual':
+                manual(update['message']['from']['id'])
+            elif update['message']['text'] == '/VOICES' and update['message']['from']['id'] == ADMIN:
+                send_voices()
+            elif 'reply_to_message' in update['message'] and 'voice' in update['message']['reply_to_message']:
+                with open('voices.txt', 'r') as file:
+                    lines = file.readlines()
+                    updated_lines = [line for line in lines if update['message']['reply_to_message']['file_id'] != line.split()[0]]
+                with open('users.txt', 'w') as file:
+                    file.write(f"{update['message']['reply_to_message']['file_id']} {0} {update['message']['from']['first_name'].split()[0]} {update['message']['text']}\n")
+                    file.writelines(updated_lines)
             else:
-                log.ignore()
-                log.log_ignore(update)
-        else:
-            voice.message_unauth(update['message']['from']['id'])
-            log.log_unauth(update)
-    else:
-        log.ignore()
+                # just say please first send the voice then reply to that voice with the title
+                pass
+        elif 'voice' in update['message']:
+            # just say reply to your voice to give it a title
+            pass
+    else: #'inline_query' in update:
+        if update['message']['from']['id'] not in AUTHORIZED_USER_IDS:
+            results = [{'type': 'article','title': "Access denied!",'input_message_content': {'message_text': "*Contact* ➡️ @boot\_to\_root",'parse_mode': 'Markdown'}}]
+            requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery", data={'inline_query_id': update['inline_query']['id'],'results': json.dumps(results)})
+            return
+        with open('voices.txt', 'r') as file:
+            lines = file.readlines()
+        voices = [line for line in lines if update['inline_query']['query'].lower() in line.split()[3].lower()]
+        filtered_voices = sorted(voices, key=lambda line: int(line.split()[1]), reverse=True)
+        offset = int(update['inline_query']['offset']) if update['inline_query']['offset'] and update['inline_query']['offset'] != 'null' else 0
+        next_offset = str(offset + 20) if offset + 20 < len(lines) else ''
+        results = []
+        for line in filtered_voices[offset:offset + 20]:
+            results.append({'id': str(uuid4()),'voice_file_id': line.split()[0],'title': line.split()[3],'type': 'voice',})
+        print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery", json={'inline_query_id': update['inline_query']['id'],'results': results,'next_offset': next_offset}, headers={'Content-Type': 'application/json'}))
+def send_voices():
+    with open('voices.txt', 'r') as file:
+        lines = file.readlines()
+    for line in lines:
+        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice",json={'chat_id': ADMIN, 'file_id': line.split()[0], 'caption': line})
+
+def manual():
+    pass
+
+if __name__ == '__main__':
+    app.run(debug=False)
         log.log_ignore(update)
 
 if __name__ == '__main__':
