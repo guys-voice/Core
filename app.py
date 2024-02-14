@@ -39,7 +39,7 @@ def process(update):
                 with open('voices.txt', 'r') as file:
                     lines = file.readlines()
                     updated_lines = [line for line in lines if update['message']['reply_to_message']['file_id'] != line.split()[0]]
-                with open('users.txt', 'w') as file:
+                with open('voices.txt', 'w') as file:
                     file.write(f"{update['message']['reply_to_message']['file_id']} {0} {update['message']['from']['first_name'].split()[0]} {update['message']['text']}\n")
                     file.writelines(updated_lines)
             else:
@@ -80,5 +80,3 @@ def manual():
 
 if __name__ == '__main__':
     app.run(debug=False)
-
-
