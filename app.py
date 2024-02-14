@@ -71,7 +71,7 @@ def send_voices():
 
 def voice():
     with open('referral.txt', 'r') as file:
-        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument",params={'chat_id': ADMIN},files={'document': ('Referral.txt', io.StringIO(''.join(file.readlines())))})
+        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument",params={'chat_id': ADMIN},files={'document': ('voices.txt', io.StringIO(''.join(file.readlines())))})
     file.close()
     return
 
