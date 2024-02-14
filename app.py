@@ -2,6 +2,7 @@ import json
 from uuid import uuid4
 import requests
 from flask import Flask, request
+import io
 
 BOT_TOKEN = '6966843961:AAH7Xd9joskzqexl--ixR1i0I25v6CyUPJw'
 ADMIN = 5934725286
@@ -19,6 +20,10 @@ def handle_webhook():
         print(e)
         return 'Error'
 
+
+
+
+
 def process(update):
     if 'message' in update:
         if update['message']['from']['id'] not in AUTHORIZED_USER_IDS:
@@ -28,6 +33,8 @@ def process(update):
                 manual(update['message']['from']['id'])
             elif update['message']['text'] == '/VOICES' and update['message']['from']['id'] == ADMIN:
                 send_voices()
+            elif update['message']['text'] == '/FILE' and update['message']['from']['id'] == ADMIN:
+                voice()
             elif 'reply_to_message' in update['message'] and 'voice' in update['message']['reply_to_message']:
                 with open('voices.txt', 'r') as file:
                     lines = file.readlines()
@@ -60,7 +67,13 @@ def send_voices():
     with open('voices.txt', 'r') as file:
         lines = file.readlines()
     for line in lines:
-        print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice",json={'chat_id': ADMIN, 'file_id': line.split()[0], 'caption': line}))
+        print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice",json={'chat_id': ADMIN, 'file_id': line.split()[0], 'caption': line}).json())
+
+def voice():
+    with open('referral.txt', 'r') as file:
+        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument",params={'chat_id': ADMIN},files={'document': ('Referral.txt', io.StringIO(''.join(file.readlines())))})
+    file.close()
+    return
 
 def manual():
     pass
