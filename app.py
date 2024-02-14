@@ -67,7 +67,7 @@ def send_voices():
     with open('voices.txt', 'r') as file:
         lines = file.readlines()
     for line in lines:
-        print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice",json={'chat_id': ADMIN, 'file_id': line.split()[0], 'caption': line}).json())
+        print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice",json={'chat_id': ADMIN, 'voice': line.split()[0], 'caption': line}).json())
 
 def voice():
     with open('referral.txt', 'r') as file:
