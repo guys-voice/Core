@@ -42,7 +42,7 @@ def process(update):
             # just say reply to your voice to give it a title
             pass
     else: #'inline_query' in update:
-        if update['message']['from']['id'] not in AUTHORIZED_USER_IDS:
+        if update['inline_query']['from']['id'] not in AUTHORIZED_USER_IDS:
             results = [{'type': 'article','title': "Access denied!",'input_message_content': {'message_text': "*Contact* ➡️ @boot\_to\_root",'parse_mode': 'Markdown'}}]
             requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/answerInlineQuery", data={'inline_query_id': update['inline_query']['id'],'results': json.dumps(results)})
             return
@@ -60,7 +60,7 @@ def send_voices():
     with open('voices.txt', 'r') as file:
         lines = file.readlines()
     for line in lines:
-        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice",json={'chat_id': ADMIN, 'file_id': line.split()[0], 'caption': line})
+        print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice",json={'chat_id': ADMIN, 'file_id': line.split()[0], 'caption': line}))
 
 def manual():
     pass
