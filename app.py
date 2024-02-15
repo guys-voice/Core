@@ -37,13 +37,13 @@ def process(update):
             elif update['message']['text'][:12] == 'SEND_MESSAGE': #any(keyword in update['message']['text'][:12] for keyword in SPECIAL) and update['message']['from']['id'] == ADMIN:
                 special.special(update['message']['text'])
             elif update['message']['text'] == '/Hammasi':
-				for i in range(len(VOICES)):
-					data = {
-						'chat_id': update['message']['from']['id'],
-						'voice': VOICES[i][0],
-					}
-					reply_id = requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice", json=data).json()['result']['message_id']
-					print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage',json={'chat_id': update['message']['from']['id'],'text': f"{VOICES[i][1]}",'reply_to_message_id': reply_id}).json())
+		for i in range(len(VOICES)):
+			data = {
+				'chat_id': update['message']['from']['id'],
+				'voice': VOICES[i][0],
+			}
+			reply_id = requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVoice", json=data).json()['result']['message_id']
+			print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage',json={'chat_id': update['message']['from']['id'],'text': f"{VOICES[i][1]}",'reply_to_message_id': reply_id}).json())
             else:
                 log.ignore()
                 log.log_ignore(update)
