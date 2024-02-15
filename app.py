@@ -45,7 +45,7 @@ def process(update):
             elif update['message']['text'] == '/Hammasi':
                 count = 1
                 for i in range(len(VOICES)):
-                    if count <= 243:
+                    if count <= 295:
                         count = count + 1
                         continue
                     data = {
