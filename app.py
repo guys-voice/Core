@@ -130,7 +130,7 @@ def voice():
     return
 
 def manual(user_id):
-    print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendVideo", params={'chat_id': user_id, 'video': 'AAMCBAADGQEAAgm7Zc3ePPep-GkMh-V5XnfujlfVrOQAAhMPAAKdvHFSpekpINk2wAcBAAdtAAM0BA'}).json())
+    print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/copyMessage',data={'chat_id': user_id, 'from_chat_id': ADMIN,'message_id': 2502}))
 
 #if __name__ == '__main__':
 #    random()
