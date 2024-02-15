@@ -67,7 +67,7 @@ def process(update):
             return
         with open('voices.txt', 'r') as file:
             lines = file.readlines()
-        voices = [line for line in lines if update['inline_query']['query'].lower() in line.split()[3].lower()]
+        voices = [line for line in lines if update['inline_query']['query'].lower() in ' '.join(line.split()[3:]).lower()]
         filtered_voices = sorted(voices, key=lambda line: int(line.split()[1]), reverse=True)
         offset = int(update['inline_query']['offset']) if update['inline_query']['offset'] and update['inline_query']['offset'] != 'null' else 0
         next_offset = str(offset + 20) if offset + 20 < len(lines) else ''
