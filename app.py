@@ -48,7 +48,7 @@ def process(update):
                 print('kelli')
                 with open('voices.txt', 'r') as file:
                     lines = file.readlines()
-                    updated_lines = [line for line in lines if update['message']['reply_to_message']['voice']['file_id'] != line.split()[0]]
+                    updated_lines = [line for line in lines if update['message']['reply_to_message']['voice']['file_id'] not in line]
                 print(updated_lines)
                 with open('voices.txt', 'w') as file:
                     file.write(f"{update['message']['reply_to_message']['voice']['file_id']} {0} {update['message']['from']['first_name'].split()[0]} {update['message']['text']}\n")
