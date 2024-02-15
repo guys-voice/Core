@@ -4,7 +4,7 @@ from uuid import uuid4
 from flask import Flask, request
 from datetime import datetime, timedelta
 
-app = Flask(name)
+app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def handle_webhook():
