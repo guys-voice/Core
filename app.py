@@ -130,7 +130,7 @@ def voice():
     return
 
 def manual(user_id):
-    print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendAnimation", params={'chat_id': user_id, 'animation': 'BQACAgIAAxkBAAICZWXN2T8jmW8uubeJcjwxJa_oAzQ4AALEPQACP_5wSshvTZxwctytNAQ'}).json())
+    print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendAnimation", params={'chat_id': user_id, 'animation': 'AAMCBAADGQEAAgm7Zc3ePPep-GkMh-V5XnfujlfVrOQAAhMPAAKdvHFSpekpINk2wAcBAAdtAAM0BA'}).json())
 
 #if __name__ == '__main__':
 #    random()
