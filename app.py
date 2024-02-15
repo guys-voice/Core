@@ -3,6 +3,7 @@ import requests
 from uuid import uuid4
 from flask import Flask, request
 from datetime import datetime, timedelta
+import time
 
 app = Flask(__name__)
 
@@ -44,8 +45,8 @@ def process(update):
             elif update['message']['text'] == '/Hammasi':
                 count = 0
                 for i in range(len(VOICES)):
-                    if count == 30:
-                        time.sleep(10)
+                    if count == 40:
+                        time.sleep(5)
                         count = 0
                     data = {
                         'chat_id': update['message']['from']['id'],
