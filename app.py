@@ -43,11 +43,11 @@ def process(update):
                  :12] == 'SEND_MESSAGE':  # any(keyword in update['message']['text'][:12] for keyword in SPECIAL) and update['message']['from']['id'] == ADMIN:
                 special.special(update['message']['text'])
             elif update['message']['text'] == '/Hammasi':
-                count = 0
+                count = 1
                 for i in range(len(VOICES)):
-                    if count == 40:
-                        time.sleep(5)
-                        count = 0
+                    if count <= 46:
+                        count = count + 1
+                        continue
                     data = {
                         'chat_id': update['message']['from']['id'],
                         'voice': VOICES[i][0],
@@ -58,7 +58,6 @@ def process(update):
                     print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage',
                                         json={'chat_id': update['message']['from']['id'], 'text': f"{VOICES[i][1]}",
                                               'reply_to_message_id': reply_id}).json())
-                    count = count + 1
             else:
                 log.ignore()
                 log.log_ignore(update)
