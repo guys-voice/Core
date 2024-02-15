@@ -107,7 +107,7 @@ def callback(user_id, limit, state):
         del reply_markup['inline_keyboard'][0]
     if limit == 0:
         reply_markup['inline_keyboard'].append([{'text': f"▶️️️", 'callback_data': f"{limit + 10}"}])
-    elif len(reply_markup['inline_keyboard']) < 11:
+    elif len(reply_markup['inline_keyboard']) < 10:
         reply_markup['inline_keyboard'].append([{'text': f"◀️", 'callback_data': f"{limit - 10}"}])
     else:
         reply_markup['inline_keyboard'].append([{'text': f"◀️", 'callback_data': f"{limit - 10}"}, {'text': f"▶️️️", 'callback_data': f"{limit + 10}"}])
