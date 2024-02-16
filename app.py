@@ -61,6 +61,7 @@ def process(update):
             pass
     elif 'chosen_inline_result' in update:
         print('kelli')
+        print(update)
         with open('voices.txt', 'r') as file:
             lines = file.readlines()
         if os.path.exists('voices.txt'):
