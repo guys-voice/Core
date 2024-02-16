@@ -44,12 +44,10 @@ def process(update):
                 send_voices()
             elif update['message']['text'] == '/FILE' and update['message']['from']['id'] == ADMIN:
                 voice()
-            elif 'reply_to_message' in update['message'] and 'voice' in update['message']['reply_to_message']:
-                print('kelli')
+            elif 'reply_to_message' in update['message'] and 'voice' in update['message']['reply_to_message'] and update['message']['chat']['type'] == 'private':
                 with open('voices.txt', 'r') as file:
                     lines = file.readlines()
                     updated_lines = [line for line in lines if update['message']['reply_to_message']['voice']['file_id'] not in line]
-                print(updated_lines)
                 with open('voices.txt', 'w') as file:
                     file.write(f"{update['message']['reply_to_message']['voice']['file_id']} {0} {update['message']['from']['first_name'].split()[0]} {update['message']['text']}\n")
                     file.writelines(updated_lines)
