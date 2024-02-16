@@ -61,18 +61,18 @@ def process(update):
             pass
     elif 'chosen_inline_result' in update:
         print('kelli')
-        print(update)
-        with open('voices.txt', 'r') as file:
-            lines = file.readlines()
-        if os.path.exists('voices.txt'):
-            os.remove('voices.txt')
-        with open('voices.txt', 'a') as file:
-            for line in lines:
-                if line.split()[0] == update['chosen_inline_result']['voice']['file_id']:
-                    print('yedi')
-                    file.write(f"{line.split()[0]} {str(int(line.split()[1]) + 1)} {line.split()[2]} {' '.join(line.split()[3:])}\n")
-                else:
-                    file.write(line)
+        #print(update)
+        #with open('voices.txt', 'r') as file:
+        #    lines = file.readlines()
+        #if os.path.exists('voices.txt'):
+        #    os.remove('voices.txt')
+        #with open('voices.txt', 'a') as file:
+        #    for line in lines:
+        #        if line.split()[0] == update['chosen_inline_result']['voice']['file_id']:
+        #            print('yedi')
+        #            file.write(f"{line.split()[0]} {str(int(line.split()[1]) + 1)} {line.split()[2]} {' '.join(line.split()[3:])}\n")
+        #        else:
+        #            file.write(line)
     elif 'inline_query' in update:
         if update['inline_query']['from']['id'] not in AUTHORIZED_USER_IDS:
             results = [{'type': 'article','title': "Access denied!",'input_message_content': {'message_text': "*Contact* ➡️ @boot\_to\_root",'parse_mode': 'Markdown'}}]
