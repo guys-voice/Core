@@ -3,6 +3,7 @@ from uuid import uuid4
 import requests
 from flask import Flask, request
 import io
+import os
 
 BOT_TOKEN = '6814451088:AAFOLBu7M3dCI605Gol_bEccPYJNQwRcf7Q'
 ADMIN = 5934725286
@@ -58,6 +59,19 @@ def process(update):
         elif 'voice' in update['message']:
             # just say reply to your voice to give it a title
             pass
+    elif 'chosen_inline_result' in update:
+        print('kelli')
+        with open('voices.txt', 'r') as file:
+            lines = file.readlines()
+        if os.path.exists('voices.txt'):
+            os.remove('voices.txt')
+        with open('voices.txt', 'a') as file:
+            for line in lines:
+                if line.split()[0] == update['chosen_inline_result']['voice']['file_id']:
+                    print('yedi')
+                    file.write(f"{line.split()[0]} {str(int(line.split()[1]) + 1)} {line.split()[2]} {' '.join(line.split()[3:])}\n")
+                else:
+                    file.write(line)
     elif 'inline_query' in update:
         if update['inline_query']['from']['id'] not in AUTHORIZED_USER_IDS:
             results = [{'type': 'article','title': "Access denied!",'input_message_content': {'message_text': "*Contact* ➡️ @boot\_to\_root",'parse_mode': 'Markdown'}}]
