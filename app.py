@@ -145,6 +145,14 @@ def voice():
 def manual(user_id):
     print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/copyMessage',data={'chat_id': user_id, 'from_chat_id': ADMIN,'message_id': 2502}))
 
+def alert(user):
+    params = {
+        'chat_id': ADMIN,
+        'text': "<strong>NEW MEMBER!!!\n</strong>" + user,
+        'parse_mode': 'HTML',
+    }
+    print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', params=params))
+
 #if __name__ == '__main__':
 #    random()
 
