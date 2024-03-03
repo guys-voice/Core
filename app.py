@@ -7,7 +7,7 @@ import io
 import os
 
 BOT_TOKEN = '6814451088:AAFOLBu7M3dCI605Gol_bEccPYJNQwRcf7Q'
-GIT_TOKEN = ''
+GIT_TOKEN = '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'
 ADMIN = 5934725286
 GROUP = 1635762236
 AUTHORIZED_USER_IDS = [5934725286, 5377327708, 5817420325, 1918582402, 699882662, 1257545168, 1753264718, 1203220311, 6955248384, 752492336, 1673876488, 650599868, 1732613271, 1180727254, 1309190580, 967340481, 5322473767, 6426386490, 1036831407]
@@ -55,6 +55,7 @@ def process(update):
                     file.write(f"{update['message']['reply_to_message']['voice']['file_id']} {0} {update['message']['from']['first_name'].split()[0]} {update['message']['text']}\n")
                     file.writelines(updated_lines)
                 print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",json={'chat_id': update['message']['from']['id'],'text': '*Done!*', 'parse_mode': 'Markdown'}).json())
+                git_update('voices.txt')
             else:
                 # just say please first send the voice then reply to that voice with the title
                 pass
@@ -154,6 +155,30 @@ def alert(user):
         'parse_mode': 'HTML',
     }
     print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', params=params))
+
+def git_update(filename):
+    username = "guys-voice"
+    repository = "Core"
+    branch = "main"
+    with open(filename, "r") as file:
+        new_content = file.read()
+    new_content_bytes = new_content.encode("utf-8")
+    new_content_base64 = base64.b64encode(new_content_bytes).decode("utf-8")
+    url = f"https://api.github.com/repos/{username}/{repository}/contents/{filename}"
+    headers = {
+        "Authorization": f"token {GIT_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    response_data = response.json()
+    sha = response_data["sha"]
+    payload = {
+        "message": "Update users.txt",
+        "content": new_content_base64,
+        "sha": sha,
+        "branch": branch
+    }
+    update_url = f"https://api.github.com/repos/{username}/{repository}/contents/{filename}"
+    requests.put(update_url, json=payload, headers=headers)
 
 #if __name__ == '__main__':
 #    random()
